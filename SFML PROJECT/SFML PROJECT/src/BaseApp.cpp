@@ -1,14 +1,5 @@
 #include "BaseApp.h"
 
-/*
- * @brief Método que ejecuta el bucle principal de la aplicación.
- *
- * Inicializa la aplicación, maneja los eventos de la ventana, actualiza y renderiza los actores,
- * y finalmente limpia los recursos al terminar.
- *
- * @return int Código de retorno de la aplicación.
-*/
-
 int
 BaseApp::run() {
 	if (!initialize()) {
@@ -25,13 +16,6 @@ BaseApp::run() {
 	return 0;
 }
 
-/*
- * @brief Inicializa la ventana y los actores para la aplicación.
- *
- * Crea una ventana y actores como el círculo y el triángulo, configurando sus componentes y atributos.
- *
- * @return bool Verdadero si la inicialización fue exitosa, falso si hubo algún error.
-*/
 bool
 BaseApp::initialize() {
 	m_window = new Window(800, 600, "LathorEngine");
@@ -58,11 +42,6 @@ BaseApp::initialize() {
 		return true;
 	}
 
-/*
- * @brief Actualiza el estado de los actores en cada cuadro.
- *
- * Actualiza la posición del círculo para que siga el ratón, y mueve el triángulo entre los waypoints.
-*/
 	void
 	BaseApp::update() {
 		// Mouse Position
@@ -78,15 +57,6 @@ BaseApp::initialize() {
 		// Mover el triángulo entre los waypoints
 		MovimientoTriangulo(deltaTime.asSeconds(), Triangle);
 	}
-
-/*
- * @brief Mueve el actor Triángulo entre los waypoints.
- *
- * Utiliza la función Seek del componente ShapeFactory para mover el triángulo hacia el siguiente waypoint.
- *
- * @param deltaTime Tiempo transcurrido desde la última actualización.
- * @param Triangle Puntero compartido al actor triángulo.
-*/
 
 	void
 		BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Actor> Triangle) {
@@ -110,12 +80,6 @@ BaseApp::initialize() {
 		}
 	}
 
-/*
- * @brief Renderiza los actores en la ventana.
- *
- * Limpia la ventana, renderiza los actores (círculo y triángulo), y muestra el contenido.
-*/
-
 	void
 	BaseApp::render() {
 		m_window->clear();
@@ -126,12 +90,6 @@ BaseApp::initialize() {
 		}*/
 		m_window->display();
 	}
-
-/*
- * @brief Limpia los recursos utilizados por la aplicación.
- *
- * Destruye la ventana y libera la memoria asociada.
-*/
 
 	void
 	BaseApp::cleanUp() {

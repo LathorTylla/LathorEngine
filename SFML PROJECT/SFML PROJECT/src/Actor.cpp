@@ -1,4 +1,5 @@
 #include "Actor.h"
+
 /*
  * @brief Constructor que inicializa un Actor con un nombre específico.
  *
@@ -12,7 +13,11 @@ Actor::Actor(std::string actorName) {
 	EngineUtilities::TSharedPointer<ShapeFactory> shape = 
 	EngineUtilities::MakeShared<ShapeFactory>();
 	addComponent(shape);
+
 	// Setup Transform
+	EngineUtilities::TSharedPointer<Transform>transform = 
+	EngineUtilities::MakeShared<Transform>();
+	addComponent(transform);
 	// Setup Sprite
 }
 
@@ -39,7 +44,9 @@ Actor::update(float deltaTime){
 void 
 Actor::render(Window& window){
 	for (unsigned int i = 0; i < components.size(); i++) {
-		window.draw(*components[i].dynamic_pointer_cast<ShapeFactory>()->getShape());
+		if (components[i].dynamic_pointer_cast<ShapeFactory>()) {
+			window.draw(*components[i].dynamic_pointer_cast<ShapeFactory>()->getShape());
+		}
 	}
 }
 
