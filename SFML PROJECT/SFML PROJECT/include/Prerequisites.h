@@ -21,6 +21,11 @@
 #include <Memory/TUniquePtr.h>
 #include <Memory/TWeakPointer.h>
 
+//IMGUI
+#include <imgui.h>
+#include <imgui-SFML.h>
+
+
 /*
  * @brief Enumeración ShapeType para definir los diferentes tipos de formas.
  *

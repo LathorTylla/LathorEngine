@@ -7,7 +7,6 @@ BaseApp::run() {
 	}
 	while (m_window->isOpen()) {
 		m_window->handleEvents();
-		deltaTime = clock.restart();
 		update();
 		render();
 	}
@@ -51,24 +50,26 @@ BaseApp::initialize() {
 
 	void
 	BaseApp::update() {
+		//Update window
+		m_window->update();
 		// Mouse Position
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*m_window->getWindow());
 		sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
 			static_cast<float>(mousePosition.y));
 
 		if (!Triangle.isNull()) {
-			Triangle->update(deltaTime.asSeconds());
+			Triangle->update(m_window->deltaTime.asSeconds());
 		}
 
 		if (!Circle.isNull()) {
-			Circle->update(deltaTime.asSeconds());
+			Circle->update(m_window->deltaTime.asSeconds());
 			//Circle->getComponent<ShapeFactory>()->Seek(mousePosF,
 			//300.0f, //velocidad
 			//deltaTime.asSeconds(),
 			//10.0f);
 		}
 		// Mover el triángulo entre los waypoints
-		MovimientoTriangulo(deltaTime.asSeconds(), Triangle);
+		MovimientoTriangulo(m_window->deltaTime.asSeconds(), Triangle);
 	}
 
 	void
@@ -99,11 +100,18 @@ BaseApp::initialize() {
 	void
 	BaseApp::render() {
 		m_window->clear();
-		Circle->render(*m_window);
-		Triangle->render(*m_window);
-		/*if (!Triangle.isNull()) {
-			m_window->draw(*Triangle->getComponent<ShapeFactory>()->getShape());
-		}*/
+		if (!Circle.isNull()) {
+			Circle->render(*m_window);
+		}
+		if (!Triangle.isNull()) {
+			Triangle->render(*m_window);
+		}
+
+		ImGui::Begin("Hello World");
+		ImGui::Text("This is an example");
+		ImGui::End();
+
+		m_window->render();
 		m_window->display();
 	}
 

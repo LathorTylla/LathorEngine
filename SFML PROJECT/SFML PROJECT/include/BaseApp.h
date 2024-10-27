@@ -88,8 +88,6 @@ public:
   cleanUp();
 
 private:
-  sf::Clock clock;    //Reloj para medir el tiempo trasncurrido
-  sf::Time deltaTime; //Tiempo transcurrido desd el ultimo cuadro
 
   Window * m_window;
   //sf::RenderWindow* window;
