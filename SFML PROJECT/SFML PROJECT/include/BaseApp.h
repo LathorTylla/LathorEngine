@@ -36,10 +36,19 @@ public:
   ActualPosition = 0; //Posicion actual de los waypoints
 
   std::vector<sf::Vector2f>waypoints = {
-    {50.0f,50.0f},
-    {400.0f,50.0f},
-    {400.0f,200.0f},
-    {50.0f,200.0f},
+    {25.0f,220.0f},
+    {25.0f,0.0f},
+    {600.0f,0.0f},
+    {600.0f,225.0f},
+    {250.0f, 225.0f},
+    {250.0f, 360.0f},
+    {750.0f, 360.0f},
+    {750.0f, 520.0f},
+    {350.0f, 520.0f},
+    {350.0f, 480.0f},
+    {140.0f, 480.0f},
+    {140.0f, 520.0f},
+    {25.0f, 520.0f},
 
   };
   
@@ -94,7 +103,10 @@ private:
   //sf::CircleShape* shape;
   EngineUtilities::TSharedPointer<Actor>Triangle; //Puntero compartidod al actor Triangle
   EngineUtilities::TSharedPointer<Actor> Circle;  //Puntero compartidod al actor Circle
+  EngineUtilities::TSharedPointer<Actor> Track;  //Puntero compartidod al actor Rectangle
   //ShapeFactory m_shapeFactory;
   //sf::Shape* Triangulo;
+
+  sf::Texture texture;
 };
 

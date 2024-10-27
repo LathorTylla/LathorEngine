@@ -22,6 +22,22 @@ BaseApp::initialize() {
 		ERROR("BaseApp", "initialize", "Error on window creation, var is null");
 		return false;
 	}
+	//track
+	Track = EngineUtilities::MakeShared<Actor>("Track");
+	if (!Track.isNull()) {
+		Track->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
+		//Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
+
+		Track->getComponent<Transform>()->setPosition(sf::Vector2f(0.0f, 0.0f));
+		Track->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
+		Track->getComponent<Transform>()->setScale(sf::Vector2f(8.2f, 12.0f));
+
+		if (!texture.loadFromFile("CircuitoRainbow.png")) {
+			std::cout << "Error de carga de textura" << std::endl;
+			return -1; //Manejar error de carga
+		}
+		Track->getComponent<ShapeFactory>()->getShape()->setTexture(&texture);
+	}
 
 		// Circle Actor
 		Circle = EngineUtilities::MakeShared<Actor>("Circle");
@@ -32,6 +48,7 @@ BaseApp::initialize() {
 			Circle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
 			Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
 			Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+
 		}
 
 		
@@ -42,7 +59,8 @@ BaseApp::initialize() {
 
 			Triangle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
 			Triangle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-			Triangle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+			Triangle->getComponent<Transform>()->setScale(sf::Vector2f(0.5f, 0.5f));
+
 		}
 
 		return true;
@@ -57,6 +75,9 @@ BaseApp::initialize() {
 		sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
 			static_cast<float>(mousePosition.y));
 
+		if (!Track.isNull()) {
+			Track->update(m_window->deltaTime.asSeconds());
+		}
 		if (!Triangle.isNull()) {
 			Triangle->update(m_window->deltaTime.asSeconds());
 		}
@@ -100,8 +121,8 @@ BaseApp::initialize() {
 	void
 	BaseApp::render() {
 		m_window->clear();
-		if (!Circle.isNull()) {
-			Circle->render(*m_window);
+		if (!Track.isNull()) {
+			Track->render(*m_window);
 		}
 		if (!Triangle.isNull()) {
 			Triangle->render(*m_window);
@@ -109,6 +130,7 @@ BaseApp::initialize() {
 
 		ImGui::Begin("Hello World");
 		ImGui::Text("This is an example");
+		//ImGui::Image(texture);
 		ImGui::End();
 
 		m_window->render();

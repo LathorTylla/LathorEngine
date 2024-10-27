@@ -106,6 +106,7 @@ public:
   
 private:
   sf::RenderWindow* m_window; //Puntero a la ventana
+  sf::View m_view;
 public:
   sf::Time deltaTime;
   sf::Clock clock;

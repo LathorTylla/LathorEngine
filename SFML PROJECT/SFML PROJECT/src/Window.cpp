@@ -19,6 +19,7 @@ Window::Window(int width, int height, const std::string& tittle) {
   else {
     MESSAGE("Window", "Window", "OK");
   }
+  ImGui::SFML::Init(*m_window);
 }
 
 /*
@@ -35,24 +36,25 @@ Window::~Window() {
 void
 Window::handleEvents() {
   sf::Event event;
-  //initialize the InGui Resource
-  ImGui::SFML::Init(*m_window);
-
   while (m_window->pollEvent(event)){
+    //initialize the InGui Resource
     ImGui::SFML::ProcessEvent(event);
 
-    if (event.type == sf::Event::Closed)
+    switch (event.type){
+    case sf::Event::Closed:
       m_window->close();
-  }
-  // Manejar el evento de redimensionar
-  if (event.type == sf::Event::Resized) {
-    // Obtener el nuevo tamaño de la ventana
-    unsigned int newWidth = event.size.width;
-    unsigned int newHeight = event.size.height;
-    // Opcional: Redefinir el tamaño de la vista para ajustarse al nuevo tamaño de la ventana
-    sf::View view = m_window->getView();
-    view.setSize(static_cast<float>(newWidth), static_cast<float>(newHeight));
-    m_window->setView(view);
+      break;
+
+    case sf::Event::Resized:
+      // Obtener el nuevo tamaño de la ventana
+      unsigned int width = event.size.width;
+      unsigned int height = event.size.height;
+
+      m_view = m_window->getView();
+      m_view.setSize(static_cast<float>(width), static_cast<float>(height));
+      m_window->setView(m_view);
+      break;
+    }
   }
 }
 
