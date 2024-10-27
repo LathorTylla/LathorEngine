@@ -24,12 +24,15 @@ BaseApp::initialize() {
 		return false;
 	}
 
-		// Triangle Actor
+		// Circle Actor
 		Circle = EngineUtilities::MakeShared<Actor>("Circle");
 		if (!Circle.isNull()) {
 			Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
-			Circle->getComponent<ShapeFactory>()->setPosition(200.0f, 200.0f);
 			Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
+
+			Circle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
+			Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
+			Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
 		}
 
 		
@@ -37,6 +40,10 @@ BaseApp::initialize() {
 		Triangle = EngineUtilities::MakeShared<Actor>("Triangle");
 		if (!Triangle.isNull()) {
 			Triangle->getComponent<ShapeFactory>()->createShape(ShapeType::TRIANGLE);
+
+			Triangle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
+			Triangle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
+			Triangle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
 		}
 
 		return true;
@@ -48,11 +55,17 @@ BaseApp::initialize() {
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(*m_window->getWindow());
 		sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
 			static_cast<float>(mousePosition.y));
+
+		if (!Triangle.isNull()) {
+			Triangle->update(deltaTime.asSeconds());
+		}
+
 		if (!Circle.isNull()) {
-			Circle->getComponent<ShapeFactory>()->Seek(mousePosF,
-				300.0f, //velocidad
-				deltaTime.asSeconds(),
-				10.0f);
+			Circle->update(deltaTime.asSeconds());
+			//Circle->getComponent<ShapeFactory>()->Seek(mousePosF,
+			//300.0f, //velocidad
+			//deltaTime.asSeconds(),
+			//10.0f);
 		}
 		// Mover el triángulo entre los waypoints
 		MovimientoTriangulo(deltaTime.asSeconds(), Triangle);
@@ -62,14 +75,17 @@ BaseApp::initialize() {
 		BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Actor> Triangle) {
 		if (Triangle.isNull()) return;
 
+		auto transform = Triangle->getComponent<Transform>();
+		if (transform.isNull()) return;
+
 		// Posición del siguiente waypoint
 		sf::Vector2f targetPos = waypoints[ActualPosition];
 
-		// Usar la función Seek del ShapeFactory para moverse hacia el waypoint
-		Triangle->getComponent<ShapeFactory>()->Seek(targetPos, 200.0f, deltaTime, 10.0f);
+		// Llamar al Seek del Transform
+		transform->Seek(targetPos, 200.0f, deltaTime, 10.0f);
 
 		// Obtener la posición actual del triángulo
-		sf::Vector2f currentPos = Triangle->getComponent<ShapeFactory>()->getShape()->getPosition();
+		sf::Vector2f currentPos = transform->getPosition();
 
 		// Calcular la distancia al waypoint
 		float distanceToTarget = std::sqrt(std::pow(targetPos.x - currentPos.x, 2) + std::pow(targetPos.y - currentPos.y, 2));

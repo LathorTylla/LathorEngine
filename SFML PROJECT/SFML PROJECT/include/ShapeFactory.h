@@ -25,8 +25,7 @@ public:
 	*/
 	ShapeFactory(ShapeType shapeType) : 
 	m_shape(nullptr), m_shapeType(ShapeType::EMPTY), 
-	Component(ComponentType::SHAPE) {
-	}
+	Component(ComponentType::SHAPE) {}
 
 	/*
 	 * @brief Crea una forma basada en el tipo especificado.
@@ -59,13 +58,6 @@ public:
 	render(Window window) override {}
 
 	/*
-	 * @brief Establece la posición de la forma.
-	 *
-	 * @param position Posición en el espacio 2D (x, y) de la forma.
-	*/
-	void
-	setPosition(sf::Vector2f& position);
-	/*
 	 * @brief Establece la posición de la forma mediante coordenadas.
 	 *
 	 * @param x Coordenada X.
@@ -97,8 +89,16 @@ public:
 	 * @param deltaTime Tiempo transcurrido desde la última actualización.
 	 * @param range Rango de alcance del movimiento.
 	*/
+	//void
+	//Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
+
 	void
-	Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
+	setRotation(float angle);
+
+	void
+	setScale(const sf::Vector2f& scl);
+
+
 	sf::Shape*
 		getShape() {
 		return m_shape;

@@ -32,6 +32,14 @@ Actor::Actor(std::string actorName) {
 
 void 
 Actor::update(float deltaTime){
+	auto transform = getComponent <Transform>();
+	auto shape = getComponent<ShapeFactory>();
+
+	if (transform && shape) {
+		shape->setPosition(transform->getPosition());
+		shape->setRotation(transform->getRotation().x);
+		shape->setScale(transform->getScale());
+	}
 }
 
 /*
