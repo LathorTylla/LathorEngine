@@ -27,8 +27,7 @@ public:
   setupGUIStye();
 
   void
-  console
-  (ConsoleErrorType msgType, std::string msg);
+   console(std::map<ConsolErrorType, std::string> programMessages);
 
 private:
   std::map<int, std::string> m_programMessages;

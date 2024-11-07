@@ -25,11 +25,11 @@
     <Filter Include="IMGUI">
       <UniqueIdentifier>{81a53b64-f772-48be-b474-597c9dbbb1d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{e7cf1fe2-82a1-4be3-8d14-762724e22a88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\BaseApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,6 +61,9 @@
       <Filter>IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="src\GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="include\GUI.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Services\NotificationSystem.h">
+      <Filter>Header Files\Services</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

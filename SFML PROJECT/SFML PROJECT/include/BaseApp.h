@@ -18,7 +18,7 @@ class
 BaseApp{
 public:
   BaseApp() = default;
-  ~BaseApp() = default;
+  ~BaseApp();
 
   /*
    * @brief Realiza el movimiento del triángulo siguiendo los waypoints.

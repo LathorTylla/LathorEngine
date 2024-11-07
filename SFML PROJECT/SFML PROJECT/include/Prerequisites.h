@@ -13,6 +13,7 @@
 #include <vector>
 #include <thread>
 #include <map>
+#include <fstream> 
 
 //Third Parties
 
@@ -42,10 +43,10 @@ ShapeType {
 };
 
 enum
-ConsoleErrorType {
+ConsolErrorType {
   NORMAL = 0,
   WARNING= 1,
-  ERROR= 2,
+  ERROR= 2
 
 };
 

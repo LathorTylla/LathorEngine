@@ -174,15 +174,10 @@
     <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_draw.cpp" />
     <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_tables.cpp" />
     <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_widgets.cpp" />
-    <ClCompile Include="Main.cpp">
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MultiProcessorCompilation>
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</MultiProcessorCompilation>
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</MultiProcessorCompilation>
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</MultiProcessorCompilation>
-    </ClCompile>
     <ClCompile Include="src\Actor.cpp" />
     <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="src\GUI.cpp" />
+    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\ShapeFactory.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
@@ -207,6 +202,7 @@
     <ClInclude Include="include\Memory\TUniquePtr.h" />
     <ClInclude Include="include\Memory\TWeakPointer.h" />
     <ClInclude Include="include\Prerequisites.h" />
+    <ClInclude Include="include\Services\NotificationSystem.h" />
     <ClInclude Include="include\ShapeFactory.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Transform.h" />
