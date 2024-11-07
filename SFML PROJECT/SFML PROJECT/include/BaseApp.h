@@ -4,6 +4,7 @@
 #include "ShapeFactory.h"
 #include <Actor.h>
 #include "Prerequisites.h"
+#include "GUI.h"
 
   /*
   * @brief Clase BaseApp que representa la aplicación base del programa.
@@ -109,5 +110,7 @@ private:
 
   sf::Texture texture;
   sf::Texture Toad;
+
+  GUI m_GUI;
 };
 

@@ -5,6 +5,7 @@ BaseApp::run() {
 	if (!initialize()) {
 		ERROR("BaseApp", "run", "Initializes result on a false statemente, check method validations");
 	}
+	m_GUI.init();
 	while (m_window->isOpen()) {
 		m_window->handleEvents();
 		update();
@@ -17,7 +18,7 @@ BaseApp::run() {
 
 bool
 BaseApp::initialize() {
-	m_window = new Window(800, 600, "LathorEngine");
+	m_window = new Window(1920, 1080, "LathorEngine");
 	if (!m_window) {
 		ERROR("BaseApp", "initialize", "Error on window creation, var is null");
 		return false;
@@ -100,7 +101,7 @@ BaseApp::initialize() {
 	}
 
 	void
-		BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Actor> Triangle) {
+	BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Actor> Triangle) {
 		if (Triangle.isNull()) return;
 
 		auto transform = Triangle->getComponent<Transform>();
@@ -133,11 +134,8 @@ BaseApp::initialize() {
 		if (!Triangle.isNull()) {
 			Triangle->render(*m_window);
 		}
-
-		ImGui::Begin("Hello World");
-		ImGui::Text("This is an example");
-		//ImGui::Image(texture);
-		ImGui::End();
+		m_window->renderToTexture();  // Finaliza el render a la textura
+		m_window->showInImGui();      // Muestra la textura en ImGui
 
 		m_window->render();
 		m_window->display();

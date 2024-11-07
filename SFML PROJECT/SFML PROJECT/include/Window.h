@@ -79,6 +79,12 @@ public:
    *
    * Crea y configura la ventana de SFML con los parámetros especificados.
    */
+
+  void
+  renderToTexture();
+  void
+  showInImGui();
+
   void 
   init();
 
@@ -107,7 +113,10 @@ public:
 private:
   sf::RenderWindow* m_window; //Puntero a la ventana
   sf::View m_view;
+  
+
 public:
+  sf::RenderTexture m_renderTexture;
   sf::Time deltaTime;
   sf::Clock clock;
 };

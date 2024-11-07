@@ -12,6 +12,7 @@
 
 Window::Window(int width, int height, const std::string& tittle) {
   m_window = new sf::RenderWindow(sf::VideoMode(width, height), tittle);
+  
 
   if (!m_window) {
     ERROR("Window", "Window", "CHECK CONSTRUCTOR");
@@ -20,6 +21,11 @@ Window::Window(int width, int height, const std::string& tittle) {
     MESSAGE("Window", "Window", "OK");
   }
   ImGui::SFML::Init(*m_window);
+
+  // Crear RenderTexture con las mismas dimensiones que la ventana
+  if (!m_renderTexture.create(width, height)) {
+    ERROR("Window", "RenderTexture", "CHECK CREATION");
+  }
 }
 
 /*
@@ -53,6 +59,7 @@ Window::handleEvents() {
       m_view = m_window->getView();
       m_view.setSize(static_cast<float>(width), static_cast<float>(height));
       m_window->setView(m_view);
+      m_renderTexture.create(width, height);
       break;
     }
   }
@@ -65,10 +72,11 @@ void
 Window::clear() {
   if (m_window != nullptr) {
     m_window->clear();
-  }
-  else
+  }else
   {
     ERROR("Window", "clear", "CHECK FOR WINDOW POINTER DATA");
+  }if (m_renderTexture.getSize().x > 0 && m_renderTexture.getSize().y > 0) {
+    m_renderTexture.clear();
   }
 }
 
@@ -80,8 +88,7 @@ Window::display() {
   if (m_window != nullptr) {
     m_window->display();
   }
-  else
-  {
+  else {
     ERROR("Window", "display", "CHECK FOR WINDOW POINTER DATA");
   }
 }
@@ -109,11 +116,8 @@ Window::isOpen() const{
 */
 void
 Window::draw(const sf:: Drawable& drawable) {
-  if (m_window != nullptr) {
-    m_window->draw(drawable);
-  }
-  else {
-    ERROR("Window", "draw", "CHECK FOR WINDOW POINTER DATA");
+  if (m_renderTexture.getSize().x > 0 && m_renderTexture.getSize().y > 0) {
+    m_renderTexture.draw(drawable);
   }
 }
 
@@ -132,6 +136,24 @@ Window::getWindow() {
     return nullptr;
   }
 }
+
+void
+Window::renderToTexture() {
+  // Después de renderizar todo lo que quieras en la textura
+  m_renderTexture.display();
+}
+
+void
+Window::showInImGui() {
+  const sf::Texture& texture = m_renderTexture.getTexture();
+  // Obtener el tamaño de la textura
+  ImVec2 size(texture.getSize().x, texture.getSize().y);
+  // Renderizar la textura en ImGui con las coordenadas UV invertidas en el eje Y
+  ImGui::Begin("Scene");
+  ImGui::Image((void*)(intptr_t)texture.getNativeHandle(), size, ImVec2(0, 1), ImVec2(1, 0));
+  ImGui::End();
+}
+
 
 void
 Window::update() {

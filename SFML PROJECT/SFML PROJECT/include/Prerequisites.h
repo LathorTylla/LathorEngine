@@ -12,6 +12,7 @@
 #include <sstream>
 #include <vector>
 #include <thread>
+#include <map>
 
 //Third Parties
 
@@ -33,11 +34,19 @@
 */
 
 enum
-  ShapeType {
+ShapeType {
   EMPTY=0,
   CIRCLE = 1,
   RECTANGLE = 2,
   TRIANGLE = 3
+};
+
+enum
+ConsoleErrorType {
+  NORMAL = 0,
+  WARNING= 1,
+  ERROR= 2,
+
 };
 
 
