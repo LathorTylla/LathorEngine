@@ -108,5 +108,6 @@ private:
   //sf::Shape* Triangulo;
 
   sf::Texture texture;
+  sf::Texture Toad;
 };
 

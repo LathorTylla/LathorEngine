@@ -49,6 +49,7 @@ BaseApp::initialize() {
 			Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
 			Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
 
+
 		}
 
 		
@@ -61,6 +62,11 @@ BaseApp::initialize() {
 			Triangle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
 			Triangle->getComponent<Transform>()->setScale(sf::Vector2f(0.5f, 0.5f));
 
+			if (!Toad.loadFromFile("Toad.png")) {
+				std::cout << "Error de carga de textura" << std::endl;
+				return -1; //Manejar error de carga
+			}
+			Triangle->getComponent<ShapeFactory>()->getShape()->setTexture(&Toad);
 		}
 
 		return true;
