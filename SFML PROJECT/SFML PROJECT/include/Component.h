@@ -10,6 +10,7 @@ enum
 	PHYSICS = 4,		//Componente de fisicas
 	AUDIOSOURCE = 5,//Componente de audio
 	SHAPE = 6,			//Componente de forma
+	TEXTURE = 7
 };
 
 class
