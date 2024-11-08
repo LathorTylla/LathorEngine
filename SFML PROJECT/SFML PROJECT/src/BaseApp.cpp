@@ -112,6 +112,9 @@ void BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPoint
   }
 }
 
+int selectedActorID = -1;
+
+
 void BaseApp::render() {
   NotificationService& notifier = NotificationService::getInstance();
   m_window->clear();
@@ -125,11 +128,22 @@ void BaseApp::render() {
   m_window->showInImGui();
 
   m_GUI.console(notifier.getNotifications());
+  m_GUI.hierarchy(m_actors, selectedActorID);
+  if (selectedActorID >= 0 && selectedActorID < m_actors.size()) {
+    m_GUI.inspector(m_actors[selectedActorID]);
+  }
+  
+  m_GUI.actorCreationMenu(m_actors);
+
+  // Llamar a la ventana de creación de actores
   m_window->render();
   m_window->display();
 }
+
 
 void BaseApp::cleanUp() {
   m_window->destroy();
   delete m_window;
 }
+
+

@@ -1,5 +1,7 @@
 #pragma once
 #include "Prerequisites.h"
+#include <vector>
+#include "Actor.h"
 
 class Window;
 
@@ -28,6 +30,18 @@ public:
 
   void
   console(const std::map<ConsolErrorType, std::vector<std::string>>& programMessages);
+
+  void 
+  hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& actors, int& selectedActorID);
+
+  void 
+  actorCreationMenu(std::vector<EngineUtilities::TSharedPointer<Actor>>& actors);
+
+
+  void 
+  inspector(EngineUtilities::TSharedPointer<Actor> selectedActor);
+
+
 
 
 private:

@@ -1,5 +1,9 @@
 #include "GUI.h"
 #include "Window.h"
+#include "Actor.h"
+#include "transform.h"
+#include "Services/NotificationSystem.h"
+
 
 void 
 GUI::init() {
@@ -101,3 +105,94 @@ GUI::console(const std::map<ConsolErrorType, std::vector<std::string>>& programM
   ImGui::EndChild();
   ImGui::End();
 }
+
+void GUI::hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& actors, int& selectedActorID) {
+  ImGui::Begin("Hierarchy"); // Abrir la ventana de jerarquía
+
+
+  for (int i = 0; i < actors.size(); ++i) {
+    if (!actors[i].isNull()) {
+      if (ImGui::Selectable(actors[i]->getName().c_str(), selectedActorID == i)) {
+        selectedActorID = i;  // Establecer actor seleccionado
+      }
+    }
+  }
+
+  ImGui::End(); // Cerrar la ventana de jerarquía
+}
+
+void GUI::inspector(EngineUtilities::TSharedPointer<Actor> selectedActor) {
+  if (selectedActor.isNull()) return;
+
+  ImGui::Begin("Inspector"); // Abrir la ventana de Inspector
+
+  ImGui::Text("Actor: %s", selectedActor->getName().c_str());
+
+  auto transform = selectedActor->getComponent<Transform>();
+  if (!transform.isNull()) {
+    sf::Vector2f position = transform->getPosition();
+    sf::Vector2f scale = transform->getScale();
+
+    // Mostrar y editar posición
+    if (ImGui::InputFloat2("Position", reinterpret_cast<float*>(&position))) {
+      transform->setPosition(position);
+    }
+
+    // Mostrar y editar escala
+    if (ImGui::InputFloat2("Scale", reinterpret_cast<float*>(&scale))) {
+      transform->setScale(scale);
+    }
+
+  }
+
+  ImGui::End(); // Cerrar la ventana de Inspector
+}
+
+void GUI::actorCreationMenu(std::vector<EngineUtilities::TSharedPointer<Actor>>& actors) {
+  static char actorName[128] = "";  // Para almacenar el nombre del actor temporalmente
+  static int selectedShape = 0;     // 0: Rectángulo, 1: Círculo, 2: Triángulo
+
+  ImGui::Begin("Actor Creation");
+
+  ImGui::InputText("Actor Name", actorName, IM_ARRAYSIZE(actorName));
+  ImGui::Combo("Shape", &selectedShape, "Rectangle\0Circle\0Triangle\0");
+
+  if (ImGui::Button("Create Actor")) {
+    std::string name = actorName;
+
+    if (name.empty()) {
+      // Enviar mensaje de error si el nombre está vacío
+      NotificationService& notifier = NotificationService::getInstance();
+      notifier.addMessage(ConsolErrorType::ERROR, "Actor creation failed: Actor name cannot be empty.");
+    }
+    else {
+      // Crear el actor con el nombre y forma seleccionada
+      EngineUtilities::TSharedPointer<Actor> newActor = EngineUtilities::MakeShared<Actor>(name);
+
+      switch (selectedShape) {
+      case 0:
+        newActor->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
+        break;
+      case 1:
+        newActor->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
+        break;
+      case 2:
+        newActor->getComponent<ShapeFactory>()->createShape(ShapeType::TRIANGLE);
+        break;
+      }
+
+      // Agregar el nuevo actor al vector de actores
+      actors.push_back(newActor);
+
+      // Notificar éxito en la creación
+      NotificationService& notifier = NotificationService::getInstance();
+      notifier.addMessage(ConsolErrorType::INF, "Actor '" + name + "' created successfully.");
+
+      // Limpiar el campo de nombre para el próximo actor
+      actorName[0] = '\0';
+    }
+  }
+  ImGui::End();
+}
+
+
