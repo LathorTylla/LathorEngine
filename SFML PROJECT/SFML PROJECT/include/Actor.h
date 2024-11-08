@@ -26,24 +26,62 @@ public:
   virtual
   ~Actor() = default;
   
+  /**
+   * @brief Actualiza el estado del actor en cada frame.
+   *
+   * Este método se llama en cada actualización del frame y permite actualizar el estado del actor
+   * de acuerdo con el tiempo delta, lo cual es útil para cálculos dependientes del tiempo.
+   *
+   * @param deltaTime El tiempo transcurrido desde el último frame, en segundos.
+   */
   void
   update(float deltaTime) override;
   
+  /**
+   * @brief Renderiza el actor en la ventana especificada.
+   *
+   * Dibuja el actor en la ventana proporcionada para representar su estado visual actual.
+   *
+   * @param window La referencia a la ventana en la cual se renderizará el actor.
+   */
   void
   render(Window& window) override;
   
+  /**
+   * @brief Destruye el actor y libera los recursos asociados.
+   *
+   * Realiza las operaciones necesarias para limpiar y liberar cualquier recurso
+   * que el actor haya usado antes de ser eliminado del sistema.
+   */
   void
   destroy();
 
-  std::string getName() {
+  /**
+   * @brief Obtiene el nombre del actor.
+   *
+   * Devuelve el nombre del actor como una cadena, que puede ser utilizada para
+   * identificar el actor en el sistema.
+   *
+   * @return El nombre del actor en formato std::string.
+   */
+  std::string 
+  getName() {
   return m_name;
   }
  
+  /**
+   * @brief Obtiene un componente específico del actor.
+   *
+   * Permite acceder a un componente del actor según su tipo. Utiliza plantillas
+   * para realizar una búsqueda de tipo segura.
+   *
+   * @tparam T El tipo del componente que se desea obtener.
+   */
   template <typename T>
   EngineUtilities::TSharedPointer<T>
   getComponent();
 private:
-  std::string m_name = "Actor"; ///< Nombre del actor.
+  std::string m_name = "Actor"; 
 };
 
 /*

@@ -6,7 +6,8 @@ BaseApp::~BaseApp() {
   notifier.saveMessagesToFile("LogData.txt");
 }
 
-int BaseApp::run() {
+int 
+BaseApp::run() {
   NotificationService& notifier = NotificationService::getInstance();
   if (!initialize()) {
     notifier.addMessage(ConsolErrorType::ERROR, "Initializes result on a false statemente, check method validations");

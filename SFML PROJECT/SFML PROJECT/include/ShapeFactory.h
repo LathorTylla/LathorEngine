@@ -92,12 +92,20 @@ public:
 	//void
 	//Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
 
+	/*
+	 * @brief Establece la rotación de la forma.
+	 *
+	 * @param angle Ángulo de rotación en grados.
+	 */
 	void
 	setRotation(float angle);
-
+	/*
+	 * @brief Escala la forma a un tamaño especificado.
+	 *
+	 * @param scl Objeto sf::Vector2f que define el factor de escala en los ejes X e Y.
+	 */
 	void
 	setScale(const sf::Vector2f& scl);
-
 
 	sf::Shape*
 		getShape() {

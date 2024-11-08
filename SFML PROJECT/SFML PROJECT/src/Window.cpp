@@ -2,13 +2,6 @@
 #include "Prerequisites.h"
 #include <SFML/Graphics.hpp>
 
-/*
- * @brief Constructor que inicializa una ventana con las dimensiones y el título especificados.
- *
- * @param width Ancho de la ventana.
- * @param height Alto de la ventana.
- * @param tittle Título de la ventana.
-*/
 
 Window::Window(int width, int height, const std::string& tittle) {
   m_window = new sf::RenderWindow(sf::VideoMode(width, height), tittle);
@@ -28,17 +21,11 @@ Window::Window(int width, int height, const std::string& tittle) {
   }
 }
 
-/*
- * @brief Destructor que libera los recursos asociados a la ventana.
-*/
 Window::~Window() {
   ImGui::SFML::Shutdown();
   delete m_window;
 }
 
-/*
- * @brief Maneja los eventos de la ventana, como el cierre de la misma.
-*/
 void
 Window::handleEvents() {
   sf::Event event;
@@ -65,9 +52,7 @@ Window::handleEvents() {
   }
 }
 
-/*
- * @brief Limpia la ventana antes de renderizar.
-*/
+
 void
 Window::clear() {
   if (m_window != nullptr) {
@@ -80,9 +65,6 @@ Window::clear() {
   }
 }
 
-/*
- * @brief Muestra el contenido renderizado en la ventana.
-*/
 void
 Window::display() {
   if (m_window != nullptr) {
@@ -93,11 +75,7 @@ Window::display() {
   }
 }
 
-/*
- * @brief Verifica si la ventana está abierta.
- *
- * @return bool Verdadero si la ventana está abierta, falso en caso contrario.
-*/
+
 bool
 Window::isOpen() const{
   if (m_window != nullptr) {
@@ -109,11 +87,7 @@ Window::isOpen() const{
   }
 }
 
-/*
- * @brief Dibuja un objeto en la ventana.
- *
- * @param drawable Objeto dibujable que será renderizado en la ventana.
-*/
+
 void
 Window::draw(const sf:: Drawable& drawable) {
   if (m_renderTexture.getSize().x > 0 && m_renderTexture.getSize().y > 0) {
@@ -121,11 +95,7 @@ Window::draw(const sf:: Drawable& drawable) {
   }
 }
 
-/*
- * @brief Obtiene el puntero a la ventana de SFML.
- *
- * @return sf::RenderWindow* Puntero a la ventana, o nullptr si no existe.
-*/
+
 sf::RenderWindow*
 Window::getWindow() {
   if (m_window != nullptr) {
@@ -166,9 +136,6 @@ Window::render(){
   ImGui::SFML::Render(*m_window);
 }
 
-/*
- * @brief Destruye la ventana y libera los recursos asociados.
-*/
 void
 Window::destroy()
 {

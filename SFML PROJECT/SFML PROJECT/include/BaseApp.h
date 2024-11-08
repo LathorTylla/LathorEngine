@@ -27,7 +27,7 @@ public:
    *
    * @param deltaTime Tiempo transcurrido desde la última actualización.
    * @param Triangle Puntero compartido al actor que representa el triángulo.
-  */
+   */
 
   void
   MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Actor> Triangle);
@@ -36,6 +36,15 @@ public:
   int
   ActualPosition = 0; //Posicion actual de los waypoints
 
+  /**
+   * @brief Lista de puntos de ruta (waypoints) para guiar el movimiento de un actor en la escena.
+   *
+   * Este vector de puntos representa una serie de coordenadas 2D (x, y) en el espacio,
+   * que el actor seguirá en secuencia. Cada punto indica una posición específica por
+   * la cual debe pasar el actor, permitiendo simular un movimiento continuo a través
+   * de la ruta definida.
+   *
+   */
   std::vector<sf::Vector2f>waypoints = {
     {25.0f,220.0f},
     {25.0f,0.0f},

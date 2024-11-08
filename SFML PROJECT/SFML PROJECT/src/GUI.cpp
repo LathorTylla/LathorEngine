@@ -4,27 +4,19 @@
 #include "transform.h"
 #include "Services/NotificationSystem.h"
 
-
 void 
 GUI::init() {
-
-  //Setup GUI style
   setupGUIStye();
 }
 
 void 
-GUI::update() {
-
-}
+GUI::update() {}
 
 void 
-GUI::render() {
-
-}
+GUI::render() {}
 
 void
-GUI::destroy() {
-}
+GUI::destroy() {}
 
 void 
 GUI::setupGUIStye() {

@@ -74,17 +74,30 @@ public:
   sf::RenderWindow*
   getWindow();
  
-  /*
-   * @brief Inicializa la ventana.
+  /**
+   * @brief Renderiza el contenido actual al RenderTexture.
    *
-   * Crea y configura la ventana de SFML con los parámetros especificados.
+   * Esta función actualiza el `RenderTexture` con todo el contenido que ha sido dibujado hasta el momento.
+   * Es útil para preparar la textura antes de mostrarla en una interfaz gráfica, como una ventana ImGui.
    */
-
   void
   renderToTexture();
+
+  /**
+   * @brief Muestra el RenderTexture actual dentro de una ventana ImGui.
+   *
+   * Utiliza ImGui para renderizar la textura previamente generada por `renderToTexture()` dentro de una ventana ImGui.
+   * Esto permite visualizar la escena renderizada directamente en la interfaz de usuario.
+   */
   void
   showInImGui();
 
+  /**
+   * @brief Inicializa los recursos necesarios para la ventana.
+   *
+   * Configura y prepara todos los elementos necesarios para el correcto funcionamiento de la ventana,
+   * incluyendo la inicialización de bibliotecas gráficas y herramientas de interfaz como ImGui.
+   */
   void 
   init();
 

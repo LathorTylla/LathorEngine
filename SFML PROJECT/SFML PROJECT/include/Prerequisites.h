@@ -42,6 +42,11 @@ ShapeType {
   TRIANGLE = 3
 };
 
+/*
+ * @brief Enumeración ConsoleErrorType para definir los diferentes tipos de errores.
+ *
+ * Los valores incluyen formas como INF, WARNING, y ERROR.
+ */
 enum
 ConsolErrorType {
   INF = 0,

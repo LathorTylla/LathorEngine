@@ -2,19 +2,49 @@
 #include "Prerequisites.h"
 #include "Component.h"
 
-class Window;
+class 
+Window;
 
+/**
+ * @class Entity
+ * @brief Clase base para todas las entidades en el motor.
+ *
+ * La clase Entity representa un objeto en el juego que puede poseer múltiples componentes,
+ * permitiendo así comportamientos y características específicas mediante un sistema de entidad-componente.
+ */
 class
 Entity {
 public:
 
+  /**
+  * @brief Destructor virtual de la clase Entity.
+  *
+  * Permite la destrucción correcta de las entidades derivadas.
+  */
   virtual
   ~Entity() = default;
   
-  virtual void
+  /**
+   * @brief Método virtual puro para actualizar la entidad.
+   *
+   * Este método es sobrescrito por clases derivadas para implementar la lógica de actualización
+   * específica de la entidad.
+   *
+   * @param deltaTime Tiempo transcurrido desde el último cuadro, usado para cálculos dependientes del tiempo.
+   */
+  virtual 
+  void
   update(float deltaTime) = 0;
   
-  virtual void
+  /**
+   * @brief Método virtual puro para renderizar la entidad.
+   *
+   * Este método es sobrescrito por clases derivadas para implementar la lógica de renderizado específica de la entidad.
+   *
+   * @param window Referencia a la ventana en la que se renderizará la entidad.
+   */
+  virtual 
+  void
   render(Window& window) = 0;
  
   /*
