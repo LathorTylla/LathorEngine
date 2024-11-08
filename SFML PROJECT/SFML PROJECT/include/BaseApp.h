@@ -105,6 +105,7 @@ private:
   EngineUtilities::TSharedPointer<Actor>Triangle; //Puntero compartidod al actor Triangle
   EngineUtilities::TSharedPointer<Actor> Circle;  //Puntero compartidod al actor Circle
   EngineUtilities::TSharedPointer<Actor> Track;  //Puntero compartidod al actor Rectangle
+  std::vector< EngineUtilities::TSharedPointer<Actor>> m_actors;
   //ShapeFactory m_shapeFactory;
   //sf::Shape* Triangulo;
 

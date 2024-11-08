@@ -34,6 +34,10 @@ public:
   
   void
   destroy();
+
+  std::string getName() {
+  return m_name;
+  }
  
   template <typename T>
   EngineUtilities::TSharedPointer<T>

@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Services/NotificationSystem.h"
 
 /*
  * @brief Constructor que inicializa un Actor con un nombre específico.
@@ -7,6 +8,7 @@
 */
 
 Actor::Actor(std::string actorName) {
+	NotificationService& notifier = NotificationService::getInstance();
 	// Setup Actor Name
 	m_name = actorName;
 	// Setup Shape
@@ -19,6 +21,8 @@ Actor::Actor(std::string actorName) {
 	EngineUtilities::MakeShared<Transform>();
 	addComponent(transform);
 	// Setup Sprite
+	// Notify that the actor was created correctly
+	notifier.Log("Actor named " + m_name + " was created.");
 }
 
 /*
