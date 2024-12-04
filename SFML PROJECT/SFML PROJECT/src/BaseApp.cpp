@@ -7,8 +7,10 @@ BaseApp::~BaseApp() {
   notifier.saveMessagesToFile("LogData.txt");
 }
 
-int BaseApp::run() {
+int 
+BaseApp::run() {
   NotificationService& notifier = NotificationService::getInstance();
+
   if (!initialize()) {
     notifier.addMessage(ConsolErrorType::ERROR, "Initialization failed, check method validations");
     notifier.saveMessagesToFile("LogData.txt");
@@ -18,6 +20,7 @@ int BaseApp::run() {
     notifier.addMessage(ConsolErrorType::INF, "All programs were initialized correctly");
   }
   m_GUI.init();
+
   while (m_window->isOpen()) {
     m_window->handleEvents();
     update();
@@ -28,24 +31,24 @@ int BaseApp::run() {
   return 0;
 }
 
-bool BaseApp::initialize() {
+bool 
+BaseApp::initialize() {
   NotificationService& notifier = NotificationService::getInstance();
+  ResourceManager& resourceManager = ResourceManager::getInstance();
+
   m_window = new Window(1920, 1080, "LathorEngine");
   if (!m_window) {
     ERROR("BaseApp", "initialize", "Error on window creation, var is null");
     return false;
   }
 
-  // Usar ResourceManager para cargar texturas
-  ResourceManager& resourceManager = ResourceManager::getInstance();
-
   // Track Actor
   Track = EngineUtilities::MakeShared<Actor>("Track");
   if (!Track.isNull()) {
     Track->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
-    Track->getComponent<Transform>()->setPosition(sf::Vector2f(0.0f, 0.0f));
-    Track->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-    Track->getComponent<Transform>()->setScale(sf::Vector2f(8.2f, 12.0f));
+    Track->getComponent<Transform>()->setTransform(sf::Vector2f(0.0f, 0.0f), 
+                                                   sf::Vector2f(0.0f, 0.0f), 
+                                                   sf::Vector2f(8.2f, 12.0f));
 
     // Cargar textura usando ResourceManager
     if (!resourceManager.loadTexture("CircuitoRainbow", "png")) {
@@ -56,27 +59,29 @@ bool BaseApp::initialize() {
     if (texture) {
       Track->getComponent<ShapeFactory>()->getShape()->setTexture(&texture->getTexture());
     }
+    m_actors.push_back(Track);
   }
-  m_actors.push_back(Track);
 
   // Circle Actor
   Circle = EngineUtilities::MakeShared<Actor>("Circle");
   if (!Circle.isNull()) {
     Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
-    Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
-    Circle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
-    Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-    Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+
+    //Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
+    Circle->getComponent<Transform>()->setTransform(sf::Vector2f(200.0f, 200.0f), 
+                                                    sf::Vector2f(0.0f, 0.0f), 
+                                                    sf::Vector2f(1.0f, 1.0f));
+    m_actors.push_back(Circle);
   }
-  m_actors.push_back(Circle);
 
   // Triangle Actor
   Triangle = EngineUtilities::MakeShared<Actor>("Triangle");
   if (!Triangle.isNull()) {
     Triangle->getComponent<ShapeFactory>()->createShape(ShapeType::TRIANGLE);
-    Triangle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
-    Triangle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
-    Triangle->getComponent<Transform>()->setScale(sf::Vector2f(0.5f, 0.5f));
+    Triangle->getComponent<Transform>()-> setTransform(sf::Vector2f(200.0f, 200.0f), 
+                                                       sf::Vector2f(0.0f, 0.0f), 
+                                                       sf::Vector2f(0.5f, 0.5f));
+
 
     // Cargar textura usando ResourceManager
     if (!resourceManager.loadTexture("Toad", "png")) {
@@ -87,17 +92,14 @@ bool BaseApp::initialize() {
     if (texture) {
       Triangle->getComponent<ShapeFactory>()->getShape()->setTexture(&texture->getTexture());
     }
+    m_actors.push_back(Triangle);
   }
-  m_actors.push_back(Triangle);
-
   return true;
 }
 
-void BaseApp::update() {
+void 
+BaseApp::update() {
   m_window->update();
-  sf::Vector2i mousePosition = sf::Mouse::getPosition(*m_window->getWindow());
-  sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
-    static_cast<float>(mousePosition.y));
 
   for (auto& actor : m_actors) {
     if (!actor.isNull()) {
@@ -109,7 +111,8 @@ void BaseApp::update() {
   }
 }
 
-void BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Actor> Triangle) {
+void 
+BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Actor> Triangle) {
   if (Triangle.isNull()) return;
 
   auto transform = Triangle->getComponent<Transform>();
@@ -127,7 +130,8 @@ void BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPoint
 
 int selectedActorID = -1;
 
-void BaseApp::render() {
+void 
+BaseApp::render() {
   NotificationService& notifier = NotificationService::getInstance();
   m_window->clear();
 
@@ -136,9 +140,9 @@ void BaseApp::render() {
       actor->render(*m_window);
     }
   }
+
   m_window->renderToTexture();
   m_window->showInImGui();
-
   m_GUI.console(notifier.getNotifications());
   m_GUI.hierarchy(m_actors, selectedActorID);
   if (selectedActorID >= 0 && selectedActorID < m_actors.size()) {
@@ -146,12 +150,12 @@ void BaseApp::render() {
   }
 
   m_GUI.actorCreationMenu(m_actors);
-
   m_window->render();
   m_window->display();
 }
 
-void BaseApp::cleanUp() {
+void 
+BaseApp::cleanUp() {
   m_window->destroy();
   delete m_window;
 }

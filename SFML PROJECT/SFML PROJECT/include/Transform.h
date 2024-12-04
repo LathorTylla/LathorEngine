@@ -83,6 +83,15 @@ public:
 		}
 	}
 
+	void
+		setTransform(const sf::Vector2f& _position,
+								 const sf::Vector2f& _rotation,
+								 const sf::Vector2f& _scale) {
+		position = _position;
+		rotation = _rotation;
+		scale = _scale;
+
+	}
 	/**
 	 * @brief Establece la posición del componente Transform.
 	 * @param _position Nueva posición a establecer.
