@@ -4,6 +4,7 @@
 #include "Actor.h"
 
 class Window;
+class actor;
 
 class 
 GUI {
@@ -65,8 +66,9 @@ public:
    * @param programMessages Mapa que contiene los mensajes de error
    * clasificados por su tipo (error, advertencia, información).
    */
-  void
+  void 
   console(const std::map<ConsolErrorType, std::vector<std::string>>& programMessages);
+
 
   /*
    * @brief Despliega la jerarquía de actores en la escena.
@@ -80,6 +82,7 @@ public:
   void 
   hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& actors, int& selectedActorID);
 
+
   /*
    * @brief Despliega un menú para la creación de nuevos actores.
    *
@@ -88,6 +91,7 @@ public:
    *
    * @param actors Vector de actores en la escena, donde se añadirá el nuevo actor.
    */
+   
   void 
   actorCreationMenu(std::vector<EngineUtilities::TSharedPointer<Actor>>& actors);
 
@@ -101,6 +105,13 @@ public:
    */
   void 
   inspector(EngineUtilities::TSharedPointer<Actor> selectedActor);
+
+
+  void
+    vec2Control(const std::string& label,
+      float* values,
+      float resetValues = 0.0f,
+      float columnWidth = 100.0f);
 
 private:
   std::map<int, std::string> m_programMessages;

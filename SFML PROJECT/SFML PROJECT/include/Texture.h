@@ -33,13 +33,7 @@ public:
 		if (!m_texture.loadFromFile(m_textureName+ "." + m_extension)) {
 			std::cout << "Error de carga de textura" << std::endl;
 		}
-		else {
-			m_textureName = "texturaDefault";
-			m_extension = "png";
-			if (!m_texture.loadFromFile(m_textureName + "." + m_extension)) {
-				std::cout << "Error de carga de textura" << std::endl;
-			}
-		}
+		
 	}
 
 	/**
@@ -58,6 +52,9 @@ public:
 	sf::Texture& getTexture() {
 		return m_texture;
 	}
+
+	void update(float deltaTime) override {}
+	void render(Window window) override {}
 private:
 	std::string m_textureName; //Nombre del archivo de la textura sin la extensión
 	std::string m_extension;	 //Extensión del archivo de la textura (por ejemplo, "png")

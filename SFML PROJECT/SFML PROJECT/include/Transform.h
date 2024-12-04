@@ -69,15 +69,15 @@ public:
 	 * @param deltaTime Tiempo transcurrido desde el último fotograma.
 	 * @param range Distancia mínima al objetivo antes de detenerse.
 	 */
-	void
+	void 
 	Seek(const sf::Vector2f& targetPosition,
 		float speed,
 		float deltaTime,
 		float range) {
 		sf::Vector2f direction = targetPosition - position;
-	float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+		float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-	if (length > range) {
+		if (length > range) {
 			direction /= length;  // Normaliza el vector
 			position += direction * speed * deltaTime;
 		}
@@ -135,6 +135,18 @@ public:
 	sf::Vector2f&
 	getScale() {
 	return scale;
+	}
+
+	float* getPosData() {
+		return &position.x;
+	}
+
+	float* getRotData() {
+		return &rotation.x;
+	}
+
+	float* getScaData() {
+		return &scale.x;
 	}
 
 private:

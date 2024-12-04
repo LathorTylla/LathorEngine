@@ -1,18 +1,18 @@
 #include "BaseApp.h"
 #include "Services/NotificationSystem.h"
+#include "Services/ResourceManager.h"
 
 BaseApp::~BaseApp() {
   NotificationService& notifier = NotificationService::getInstance();
   notifier.saveMessagesToFile("LogData.txt");
 }
 
-int 
-BaseApp::run() {
+int BaseApp::run() {
   NotificationService& notifier = NotificationService::getInstance();
   if (!initialize()) {
-    notifier.addMessage(ConsolErrorType::ERROR, "Initializes result on a false statemente, check method validations");
+    notifier.addMessage(ConsolErrorType::ERROR, "Initialization failed, check method validations");
     notifier.saveMessagesToFile("LogData.txt");
-    ERROR("BaseApp", "run", "Initializes result on a false statemente, check method validations");
+    ERROR("BaseApp", "run", "Initialization failed, check method validations");
   }
   else {
     notifier.addMessage(ConsolErrorType::INF, "All programs were initialized correctly");
@@ -36,7 +36,10 @@ bool BaseApp::initialize() {
     return false;
   }
 
-  // track
+  // Usar ResourceManager para cargar texturas
+  ResourceManager& resourceManager = ResourceManager::getInstance();
+
+  // Track Actor
   Track = EngineUtilities::MakeShared<Actor>("Track");
   if (!Track.isNull()) {
     Track->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
@@ -44,11 +47,15 @@ bool BaseApp::initialize() {
     Track->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
     Track->getComponent<Transform>()->setScale(sf::Vector2f(8.2f, 12.0f));
 
-    if (!texture.loadFromFile("CircuitoRainbow.png")) {
+    // Cargar textura usando ResourceManager
+    if (!resourceManager.loadTexture("CircuitoRainbow", "png")) {
       std::cout << "Error de carga de textura" << std::endl;
       return false;
     }
-    Track->getComponent<ShapeFactory>()->getShape()->setTexture(&texture);
+    auto texture = resourceManager.getTexture("CircuitoRainbow");
+    if (texture) {
+      Track->getComponent<ShapeFactory>()->getShape()->setTexture(&texture->getTexture());
+    }
   }
   m_actors.push_back(Track);
 
@@ -71,13 +78,18 @@ bool BaseApp::initialize() {
     Triangle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
     Triangle->getComponent<Transform>()->setScale(sf::Vector2f(0.5f, 0.5f));
 
-    if (!Toad.loadFromFile("Toad.png")) {
+    // Cargar textura usando ResourceManager
+    if (!resourceManager.loadTexture("Toad", "png")) {
       std::cout << "Error de carga de textura" << std::endl;
       return false;
     }
-    Triangle->getComponent<ShapeFactory>()->getShape()->setTexture(&Toad);
+    auto texture = resourceManager.getTexture("Toad");
+    if (texture) {
+      Triangle->getComponent<ShapeFactory>()->getShape()->setTexture(&texture->getTexture());
+    }
   }
   m_actors.push_back(Triangle);
+
   return true;
 }
 
@@ -115,7 +127,6 @@ void BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPoint
 
 int selectedActorID = -1;
 
-
 void BaseApp::render() {
   NotificationService& notifier = NotificationService::getInstance();
   m_window->clear();
@@ -133,18 +144,14 @@ void BaseApp::render() {
   if (selectedActorID >= 0 && selectedActorID < m_actors.size()) {
     m_GUI.inspector(m_actors[selectedActorID]);
   }
-  
+
   m_GUI.actorCreationMenu(m_actors);
 
-  // Llamar a la ventana de creación de actores
   m_window->render();
   m_window->display();
 }
-
 
 void BaseApp::cleanUp() {
   m_window->destroy();
   delete m_window;
 }
-
-
