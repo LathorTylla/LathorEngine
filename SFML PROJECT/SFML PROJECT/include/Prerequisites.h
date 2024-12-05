@@ -29,6 +29,13 @@
 #include <imgui.h>
 #include <imgui-SFML.h>
 
+//Vectores
+#include "Vectores/MathLibrary.h"
+#include "Vectores/Quaternion.h"
+#include "Vectores/Vector2.h"
+#include "Vectores/Vector3.h"
+#include "Vectores/Vector4.h"
+
 
 /*
  * @brief Enumeración ShapeType para definir los diferentes tipos de formas.

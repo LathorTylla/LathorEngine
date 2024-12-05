@@ -45,7 +45,7 @@ public:
    * de la ruta definida.
    *
    */
-  std::vector<sf::Vector2f>waypoints = {
+  std::vector<Vector2>waypoints = {
     {25.0f,220.0f},
     {25.0f,0.0f},
     {600.0f,0.0f},

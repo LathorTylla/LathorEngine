@@ -46,13 +46,13 @@ BaseApp::initialize() {
   Track = EngineUtilities::MakeShared<Actor>("Track");
   if (!Track.isNull()) {
     Track->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
-    Track->getComponent<Transform>()->setTransform(sf::Vector2f(0.0f, 0.0f), 
-                                                   sf::Vector2f(0.0f, 0.0f), 
-                                                   sf::Vector2f(8.2f, 12.0f));
+    Track->getComponent<Transform>()->setTransform(Vector2(0.0f, 0.0f), 
+                                                   Vector2(0.0f, 0.0f), 
+                                                   Vector2(8.2f, 12.0f));
 
     // Cargar textura usando ResourceManager
     if (!resourceManager.loadTexture("CircuitoRainbow", "png")) {
-      std::cout << "Error de carga de textura" << std::endl;
+      notifier.addMessage(ConsolErrorType::ERROR, "Error al cargar la textura del mapa");
       return false;
     }
     auto texture = resourceManager.getTexture("CircuitoRainbow");
@@ -68,9 +68,9 @@ BaseApp::initialize() {
     Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
 
     //Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
-    Circle->getComponent<Transform>()->setTransform(sf::Vector2f(200.0f, 200.0f), 
-                                                    sf::Vector2f(0.0f, 0.0f), 
-                                                    sf::Vector2f(1.0f, 1.0f));
+    Circle->getComponent<Transform>()->setTransform(Vector2(200.0f, 200.0f), 
+                                                    Vector2(0.0f, 0.0f), 
+                                                    Vector2(1.0f, 1.0f));
     m_actors.push_back(Circle);
   }
 
@@ -78,14 +78,14 @@ BaseApp::initialize() {
   Triangle = EngineUtilities::MakeShared<Actor>("Triangle");
   if (!Triangle.isNull()) {
     Triangle->getComponent<ShapeFactory>()->createShape(ShapeType::TRIANGLE);
-    Triangle->getComponent<Transform>()-> setTransform(sf::Vector2f(200.0f, 200.0f), 
-                                                       sf::Vector2f(0.0f, 0.0f), 
-                                                       sf::Vector2f(0.5f, 0.5f));
+    Triangle->getComponent<Transform>()-> setTransform(Vector2(200.0f, 200.0f), 
+                                                       Vector2(0.0f, 0.0f), 
+                                                       Vector2(0.5f, 0.5f));
 
 
     // Cargar textura usando ResourceManager
     if (!resourceManager.loadTexture("Toad", "png")) {
-      std::cout << "Error de carga de textura" << std::endl;
+      notifier.addMessage(ConsolErrorType::ERROR, "Error al cargar la textura Toad");
       return false;
     }
     auto texture = resourceManager.getTexture("Toad");
@@ -118,9 +118,9 @@ BaseApp::MovimientoTriangulo(float deltaTime, EngineUtilities::TSharedPointer<Ac
   auto transform = Triangle->getComponent<Transform>();
   if (transform.isNull()) return;
 
-  sf::Vector2f targetPos = waypoints[ActualPosition];
+  Vector2 targetPos = waypoints[ActualPosition];
   transform->Seek(targetPos, 200.0f, deltaTime, 10.0f);
-  sf::Vector2f currentPos = transform->getPosition();
+  Vector2 currentPos = transform->getPosition();
   float distanceToTarget = std::sqrt(std::pow(targetPos.x - currentPos.x, 2) + std::pow(targetPos.y - currentPos.y, 2));
 
   if (distanceToTarget < 10.0f) {

@@ -100,7 +100,8 @@ GUI::console(const std::map<ConsolErrorType, std::vector<std::string>>& programM
   ImGui::End();
 }
 
-void GUI::hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& actors, int& selectedActorID) {
+void 
+GUI::hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& actors, int& selectedActorID) {
   ImGui::Begin("Hierarchy"); // Abrir la ventana de jerarquía
 
 
@@ -116,7 +117,8 @@ void GUI::hierarchy(const std::vector<EngineUtilities::TSharedPointer<Actor>>& a
 }
 
 
-void GUI::inspector(EngineUtilities::TSharedPointer<Actor> selectedActor) {
+void 
+GUI::inspector(EngineUtilities::TSharedPointer<Actor> selectedActor) {
   if (selectedActor.isNull()) return;
 
   ImGui::Begin("Inspector");
@@ -159,7 +161,8 @@ void GUI::inspector(EngineUtilities::TSharedPointer<Actor> selectedActor) {
 }
 
 
-void GUI::actorCreationMenu(std::vector<EngineUtilities::TSharedPointer<Actor>>& actors) {
+void 
+GUI::actorCreationMenu(std::vector<EngineUtilities::TSharedPointer<Actor>>& actors) {
   static char actorName[128] = "";  // Para almacenar el nombre del actor temporalmente
   static int selectedShape = 0;     // 0: Rectángulo, 1: Círculo, 2: Triángulo
 
@@ -204,12 +207,12 @@ void GUI::actorCreationMenu(std::vector<EngineUtilities::TSharedPointer<Actor>>&
     }
   }
 
-
   ImGui::End();
 }
 
 
-void GUI::vec2Control(const std::string& label,
+void 
+GUI::vec2Control(const std::string& label,
   float* values,
   float resetValue,
   float columnWidth) {

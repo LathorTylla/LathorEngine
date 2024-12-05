@@ -70,11 +70,11 @@ public:
 	 * @param range Distancia mínima al objetivo antes de detenerse.
 	 */
 	void 
-	Seek(const sf::Vector2f& targetPosition,
+	Seek(const Vector2 targetPosition,
 		float speed,
 		float deltaTime,
 		float range) {
-		sf::Vector2f direction = targetPosition - position;
+		Vector2 direction = targetPosition - position;
 		float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
 		if (length > range) {
@@ -84,9 +84,9 @@ public:
 	}
 
 	void
-		setTransform(const sf::Vector2f& _position,
-								 const sf::Vector2f& _rotation,
-								 const sf::Vector2f& _scale) {
+		setTransform(const Vector2& _position,
+								 const Vector2& _rotation,
+								 const Vector2& _scale) {
 		position = _position;
 		rotation = _rotation;
 		scale = _scale;
@@ -97,7 +97,7 @@ public:
 	 * @param _position Nueva posición a establecer.
 	 */
 	void
-	setPosition(const sf::Vector2f& _position) {
+	setPosition(const Vector2& _position) {
 	position = _position;
 	}
 
@@ -106,7 +106,7 @@ public:
 	 * @param _rotation Nueva rotación a establecer.
 	 */
 	void
-	setRotation(const sf::Vector2f& _rotation) {
+	setRotation(const Vector2& _rotation) {
 	rotation = _rotation;
 	}
 
@@ -115,7 +115,7 @@ public:
 	 * @param _scale Nueva escala a establecer.
 	 */
 	void
-	setScale(const sf::Vector2f& _scale) {
+	setScale(const Vector2& _scale) {
 	scale = _scale;
 	}
 
@@ -123,7 +123,7 @@ public:
 	 * @brief Obtiene la posición actual del componente Transform.
 	 * @return sf::Vector2f& Referencia a la posición actual.
 	 */
-	sf::Vector2f&
+	Vector2&
 	getPosition() {
 	return position;
 	}
@@ -132,7 +132,7 @@ public:
 	 * @brief Obtiene la rotación actual del componente Transform.
 	 * @return sf::Vector2f& Referencia a la rotación actual.
 	 */
-	sf::Vector2f& 
+	Vector2& 
 	getRotation() {
 	return rotation;
 	}
@@ -141,7 +141,7 @@ public:
 	 * @brief Obtiene la escala actual del componente Transform.
 	 * @return sf::Vector2f& Referencia a la escala actual.
 	 */
-	sf::Vector2f&
+	Vector2&
 	getScale() {
 	return scale;
 	}
@@ -159,8 +159,8 @@ public:
 	}
 
 private:
-	sf::Vector2f position; 
-	sf::Vector2f rotation;
-	sf::Vector2f scale;
+	Vector2 position; 
+	Vector2 rotation;
+	Vector2 scale;
 };
 

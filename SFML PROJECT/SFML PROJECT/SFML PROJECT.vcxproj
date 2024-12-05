@@ -207,6 +207,11 @@
     <ClInclude Include="include\ShapeFactory.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Transform.h" />
+    <ClInclude Include="include\Vectores\MathLibrary.h" />
+    <ClInclude Include="include\Vectores\Quaternion.h" />
+    <ClInclude Include="include\Vectores\Vector2.h" />
+    <ClInclude Include="include\Vectores\Vector3.h" />
+    <ClInclude Include="include\Vectores\Vector4.h" />
     <ClInclude Include="include\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

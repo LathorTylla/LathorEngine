@@ -2,6 +2,7 @@
 #include "Prerequisites.h"
 #include "Component.h"
 #include "Window.h"
+#include "Vectores/Vector2.h"
 
 /*
  * @brief Clase ShapeFactory para la creación y gestión de formas.
@@ -72,7 +73,7 @@ public:
 	 * @param position Objeto sf::Vector2f que contiene las coordenadas de la posición.
 	*/
 	void
-	setPosition(const sf::Vector2f& position);
+	setPosition(const Vector2& position);
 	/*
 	 * @brief Establece el color de relleno de la forma.
 	 *
@@ -105,7 +106,7 @@ public:
 	 * @param scl Objeto sf::Vector2f que define el factor de escala en los ejes X e Y.
 	 */
 	void
-	setScale(const sf::Vector2f& scl);
+	setScale(const Vector2& scl);
 
 	sf::Shape*
 		getShape() {
