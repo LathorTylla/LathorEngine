@@ -26,7 +26,7 @@ public:
 	 * @return Un nuevo vector que es la suma del actual y el otro vector.
    */
 	Vector2
-		operator+(const Vector2& other)const {
+	operator+(const Vector2& other)const {
 		float new_valX = x + other.x;
 		float new_valY = y + other.y;
 		return Vector2(new_valX, new_valY);
@@ -38,7 +38,7 @@ public:
 	 * @return Un nuevo vector que es la resta del actual y el otro vector.
 	 */
 	Vector2
-		operator-(const Vector2& other)const {
+	operator-(const Vector2& other)const {
 		float new_valX = x - other.x;
 		float new_valY = y - other.y;
 		return Vector2(new_valX, new_valY);
@@ -50,7 +50,7 @@ public:
 	 * @return Un nuevo vector resultante de la multiplicación por el escalar.
 	 */
 	Vector2
-		operator*(float escalar)const {
+	operator*(float escalar)const {
 		float new_valX = x * escalar;
 		float new_valY = y * escalar;
 		return Vector2(new_valX, new_valY);
@@ -61,7 +61,7 @@ public:
 	 * @return La magnitud del vector.
 	 */
 	float
-		magnitud() const {
+	magnitud() const {
 		return MraizNewton(x * x + y * y);
 	}
 
@@ -69,7 +69,8 @@ public:
 	 * Devuelve el vector normalizado (unidad), es decir, con magnitud 1.
 	 * @return Un nuevo vector que es la versión normalizada del vector actual.
 	 */
-	Vector2 normalizar() const {
+	Vector2 
+	normalizar() const {
 		float mag = magnitud();
 		if (mag == 0) {
 			return Vector2(0, 0);
@@ -82,7 +83,7 @@ public:
 	 * @return Un puntero a la componente x del vector.
 	 */
 	float*
-		data() {
+	data() {
 		return &x;
 	}
 
@@ -91,7 +92,7 @@ public:
 	 * @return Un puntero constante a la componente x del vector.
 	 */
 	const float*
-		data() const {
+	data() const {
 		return &x;
 	}
 

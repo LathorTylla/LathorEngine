@@ -49,12 +49,33 @@ public:
 	 *
 	 * @return sf::Texture& Referencia a la textura cargada en este componente.
 	 */
-	sf::Texture& getTexture() {
+	sf::Texture& 
+	getTexture() {
 		return m_texture;
 	}
 
-	void update(float deltaTime) override {}
-	void render(Window window) override {}
+	/**
+	 * @brief Actualiza el componente de textura.
+   *
+	 * Este método no realiza ninguna operación en este momento, pero está disponible
+	 * para ser sobrescrito o ampliado si se requiere funcionalidad adicional en el futuro.
+	 *
+	 * @param deltaTime Tiempo transcurrido desde el último fotograma.
+	 */
+	void 
+	update(float deltaTime) override {}
+
+	/**
+	 * @brief Renderiza el componente de textura.
+	 *
+	 * Actualmente no realiza operaciones de renderizado. Este método puede extenderse en caso
+	 * de que se necesiten operaciones relacionadas con la textura en el futuro.
+	 *
+	 * @param window Referencia al objeto `Window` donde se renderizaría la textura.
+	 */
+	void 
+	render(Window window) override {}
+
 private:
 	std::string m_textureName; //Nombre del archivo de la textura sin la extensión
 	std::string m_extension;	 //Extensión del archivo de la textura (por ejemplo, "png")

@@ -83,8 +83,15 @@ public:
 		}
 	}
 
+	/**
+	 * @brief Establece la transformación completa (posición, rotación, escala).
+	 *
+	 * @param _position Nueva posición del objeto.
+	 * @param _rotation Nueva rotación del objeto.
+	 * @param _scale Nueva escala del objeto.
+	 */
 	void
-		setTransform(const Vector2& _position,
+	setTransform(const Vector2& _position,
 								 const Vector2& _rotation,
 								 const Vector2& _scale) {
 		position = _position;
@@ -146,15 +153,30 @@ public:
 	return scale;
 	}
 
-	float* getPosData() {
+	/**
+	 * @brief Obtiene un puntero al dato de posición (componente X).
+	 * @return Puntero al componente X de la posición.
+	 */
+	float* 
+	getPosData() {
 		return &position.x;
 	}
 
-	float* getRotData() {
+	/**
+	 * @brief Obtiene un puntero al dato de rotación (componente X).
+   * @return Puntero al componente X de la rotación.
+   */
+	float* 
+	getRotData() {
 		return &rotation.x;
 	}
 
-	float* getScaData() {
+	/**
+	 * @brief Obtiene un puntero al dato de escala (componente X).
+	 * @return Puntero al componente X de la escala.
+	 */
+	float* 
+	getScaData() {
 		return &scale.x;
 	}
 

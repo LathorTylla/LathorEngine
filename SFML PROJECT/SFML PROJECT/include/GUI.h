@@ -6,10 +6,24 @@
 class Window;
 class actor;
 
+/**
+ * @class GUI
+ * @brief Clase para gestionar la interfaz gráfica de usuario (GUI).
+ *
+ * Esta clase maneja la creación, actualización, renderizado y destrucción
+ * de la interfaz gráfica del programa. Proporciona herramientas para interactuar
+ * con los actores de la escena y visualizar información relevante.
+ */
 class 
 GUI {
 public:
+  /**
+   * @brief Constructor por defecto de la clase GUI.
+   */
 	GUI() = default;
+  /**
+   * @brief Destructor por defecto de la clase GUI.
+   */
 	~GUI() = default;
 
   /*
@@ -106,9 +120,19 @@ public:
   void 
   inspector(EngineUtilities::TSharedPointer<Actor> selectedActor);
 
-
+  /**
+   * @brief Control de vectores 2D en la GUI.
+   *
+   * Proporciona controles interactivos para modificar propiedades de vectores
+   * como posición, rotación o escala en el inspector.
+   *
+   * @param label Etiqueta que describe el vector mostrado.
+   * @param values Puntero a los valores del vector (X, Y).
+   * @param resetValues Valores predeterminados para el vector.
+   * @param columnWidth Ancho de columna para el diseño de la GUI.
+   */
   void
-    vec2Control(const std::string& label,
+  vec2Control(const std::string& label,
       float* values,
       float resetValues = 0.0f,
       float columnWidth = 100.0f);
