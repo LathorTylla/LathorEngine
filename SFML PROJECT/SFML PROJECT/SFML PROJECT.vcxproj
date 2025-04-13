@@ -74,7 +74,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin/$(PlatformShortName)/</OutDir>
     <IntDir>$(SolutionDir)intermediate/$(ProjectName)/$(PlatformShortName)/$(Configuration)/</IntDir>
-    <TargetName>AppName_d</TargetName>
+    <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin/$(PlatformShortName)/</OutDir>
@@ -83,7 +83,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin/$(PlatformShortName)/</OutDir>
     <IntDir>$(SolutionDir)intermediate/$(ProjectName)/$(PlatformShortName)/$(Configuration)/</IntDir>
-    <TargetName>AppName_d</TargetName>
+    <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin/$(PlatformShortName)/</OutDir>
@@ -92,18 +92,19 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>Yes(/MP)</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\imgui-sfml-2.6.x;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -111,11 +112,12 @@
       <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>Yes(/MP)</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\imgui-sfml-2.6.x;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,24 +125,25 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>Yes(/MP)</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\imgui-sfml-2.6.x;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,11 +151,12 @@
       <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>Yes(/MP)</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>./include/;D:\Github\SFML\SFML PROJECT\ThirdParties\imgui-sfml-2.6.x;D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,16 +164,55 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Github\SFML\SFML PROJECT\ThirdParties\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MultiProcessorCompilation>
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</MultiProcessorCompilation>
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</MultiProcessorCompilation>
-      <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</MultiProcessorCompilation>
-    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML.cpp" />
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui.cpp" />
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_demo.cpp" />
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_draw.cpp" />
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_tables.cpp" />
+    <ClCompile Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_widgets.cpp" />
+    <ClCompile Include="src\Actor.cpp" />
+    <ClCompile Include="src\BaseApp.cpp" />
+    <ClCompile Include="src\GUI.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\ShapeFactory.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imconfig-SFML.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imconfig.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML_export.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imgui_internal.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imstb_rectpack.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imstb_textedit.h" />
+    <ClInclude Include="..\ThirdParties\imgui-sfml-2.6.x\imstb_truetype.h" />
+    <ClInclude Include="include\Actor.h" />
+    <ClInclude Include="include\BaseApp.h" />
+    <ClInclude Include="include\Component.h" />
+    <ClInclude Include="include\Entity.h" />
+    <ClInclude Include="include\GUI.h" />
+    <ClInclude Include="include\Memory\TSharedPointer.h" />
+    <ClInclude Include="include\Memory\TStaticPtr.h" />
+    <ClInclude Include="include\Memory\TUniquePtr.h" />
+    <ClInclude Include="include\Memory\TWeakPointer.h" />
+    <ClInclude Include="include\Prerequisites.h" />
+    <ClInclude Include="include\Services\NotificationSystem.h" />
+    <ClInclude Include="include\Services\ResourceManager.h" />
+    <ClInclude Include="include\ShapeFactory.h" />
+    <ClInclude Include="include\Texture.h" />
+    <ClInclude Include="include\Transform.h" />
+    <ClInclude Include="include\Vectores\MathLibrary.h" />
+    <ClInclude Include="include\Vectores\Quaternion.h" />
+    <ClInclude Include="include\Vectores\Vector2.h" />
+    <ClInclude Include="include\Vectores\Vector3.h" />
+    <ClInclude Include="include\Vectores\Vector4.h" />
+    <ClInclude Include="include\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
